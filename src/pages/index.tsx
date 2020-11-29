@@ -1,13 +1,24 @@
 import { times } from 'ramda'
 import type { FC } from 'react'
+import StraighHighwayDie from '../components/dice/StraightHighway'
 
 const Cell: FC<{ idx: number }> = ({ idx, ...props }) => (
   <div {...props}>
-    <button>Space {idx}</button>
+    <button>
+      <StraighHighwayDie />
+    </button>
     <style jsx>{`
+      div {
+        border-top: 1px solid #000;
+        border-left: 1px solid #000;
+      }
       button {
-        width: 100px;
+        appearance: none;
+        background: 0;
+        border: none;
+        padding: 0;
         height: 100px;
+        width: 100px;
       }
     `}</style>
   </div>
@@ -33,6 +44,8 @@ const Page: FC = () => (
       article {
         display: grid;
         grid-template-columns: repeat(7, 100px);
+        border-right: 1px solid #000;
+        border-bottom: 1px solid #000;
       }
     `}</style>
   </>
