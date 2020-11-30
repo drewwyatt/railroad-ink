@@ -1,6 +1,6 @@
 import { times } from 'ramda'
 import type { FC } from 'react'
-import StraighHighwayDie from '../components/dice/StraightHighway'
+import StraighHighwayDie from '../components/dice/routes/StraightHighway'
 
 const Cell: FC<{ idx: number }> = ({ idx, ...props }) => (
   <div {...props}>
