@@ -1,7 +1,12 @@
-import type { Normal, Junction } from '~/components/dice'
+export type NormalRoute =
+  | 'CurvedHighway'
+  | 'StraightHighway'
+  | 'TJunctionHighway'
+  | 'CurvedRailway'
+  | 'StraightRailway'
+  | 'TJunctionRailway'
 
-export type NormalRoute = keyof typeof Normal
-export type JunctionRoute = keyof typeof Junction
+export type JunctionRoute = 'Overpass' | 'StraightStation' | 'CurvedStation'
 
 type Route = NormalRoute | JunctionRoute
 export default Route

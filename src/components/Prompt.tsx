@@ -9,7 +9,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import type { FC } from 'react'
-import { NormalRoute, JunctionRoute } from '~/models/routes'
+import Route, { NormalRoute, JunctionRoute } from '~/models/routes'
 import * as Dice from './dice'
 
 type Props<T extends NormalRoute[] | JunctionRoute[]> = {
@@ -22,21 +22,18 @@ type Props<T extends NormalRoute[] | JunctionRoute[]> = {
     : (route: JunctionRoute) => void
 }
 
-const Options: FC<{ from: NormalRoute[] | JunctionRoute[] }> = ({ from: options }) => {
-  const isNormal = options[0] in Dice.Normal
-  return (
-    <ul>
-      {(options as string[]).map(key => {
-        const Die = isNormal ? Dice.Normal[key] : Dice.Junction[key]
-        return (
-          <li key={key}>
-            <Die width="100px" />
-          </li>
-        )
-      })}
-    </ul>
-  )
-}
+const Options: FC<{ from: Route[] }> = ({ from: options }) => (
+  <ul>
+    {options.map(key => {
+      const Die = Dice[key]
+      return (
+        <li key={key}>
+          <Die width="100px" />
+        </li>
+      )
+    })}
+  </ul>
+)
 
 const Prompt = <T extends NormalRoute[] | JunctionRoute[]>({
   title,
