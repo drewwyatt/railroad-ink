@@ -1,6 +1,7 @@
 import { times } from 'ramda'
 import type { FC } from 'react'
 import StraighHighwayDie from '../components/dice/routes/StraightHighway'
+import Prompt from '../components/Prompt'
 
 const Cell: FC<{ idx: number }> = ({ idx, ...props }) => (
   <div {...props}>
@@ -31,6 +32,7 @@ const Page: FC = () => (
     <main>
       <h1>Railroad Ink</h1>
       <article>{times(cell, 7 * 7)}</article>
+      <Prompt />
     </main>
     <style jsx>{`
       main {
