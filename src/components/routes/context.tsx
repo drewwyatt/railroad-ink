@@ -1,6 +1,6 @@
 import { Dispatch, FC, createContext, useContext, useState } from 'react'
 import { PendingResult, pending } from '~/models/result'
-import type { NormalRoute, JunctionRoute } from './models'
+import type { NormalRoute, JunctionRoute } from '~/models/routes'
 
 type Routes = [
   PendingResult<NormalRoute>,
