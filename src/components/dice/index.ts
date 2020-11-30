@@ -7,3 +7,4 @@ export { default as StraightRailway } from './StraightRailway'
 export { default as TJunctionRailway } from './TJunctionRailway'
 
 export { default as Overpass } from './Overpass'
+export { default as StraightStation } from './StraightStation'
