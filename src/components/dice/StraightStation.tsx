@@ -1,19 +1,19 @@
 import type { FC, SVGProps } from 'react'
 
 const StraightStation: FC<SVGProps<SVGSVGElement>> = props => (
-  <svg viewBox="0 0 207 206" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg viewBox="0 0 208 205" xmlns="http://www.w3.org/2000/svg" {...props}>
     <title>Straight Station</title>
     <g fill="none" fillRule="evenodd">
-      <path fill="#fff" d="M206.5.5H2.5v204h204z" />
-      <path fill="#000" d="M121 86H88v33h33z" />
+      <path fill="#fff" d="M1.5.5h204v204H1.5z" />
+      <path fill="#000" d="M87 86h33v33H87z" />
       <g stroke="#000" strokeLinecap="square">
-        <path d="M104.5 123.417v19.166" />
-        <path strokeWidth={2} d="M89 119v86M120 119v86" />
-        <path d="M104.5 156.417v19.166M104.5 188.417V204.5" />
+        <path d="M14.417 102.5h19.166" />
+        <path strokeWidth={2} d="M1.413 86.5L119 87M1.413 118.5L119 119" />
+        <path d="M47.417 102.5h19.166M79.417 102.5h19.166" />
       </g>
       <g stroke="#000" strokeLinecap="square">
-        <path strokeWidth={2} d="M118 103l-116.5-.5" />
-        <path d="M20 92.917v19.166M72 92.917v19.166M46 92.917v19.166" />
+        <path strokeWidth={2} d="M90 103l116.5-.5" />
+        <path d="M188 92.917v19.166M136 92.917v19.166M162 92.917v19.166" />
       </g>
     </g>
   </svg>
