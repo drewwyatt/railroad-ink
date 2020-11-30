@@ -1,5 +1,6 @@
 import {
   Button,
+  Grid,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -10,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import type { FC } from 'react'
 import Route, { NormalRoute, JunctionRoute } from '~/models/routes'
-import * as Dice from './dice'
+import Die from './Die'
 
 type Props<T extends NormalRoute[] | JunctionRoute[]> = {
   options: T
@@ -23,16 +24,11 @@ type Props<T extends NormalRoute[] | JunctionRoute[]> = {
 }
 
 const Options: FC<{ from: Route[] }> = ({ from: options }) => (
-  <ul>
-    {options.map(key => {
-      const Die = Dice[key]
-      return (
-        <li key={key}>
-          <Die width="100px" />
-        </li>
-      )
-    })}
-  </ul>
+  <Grid templateColumns={`repeat(${options.length}, 1fr)`} gap="2">
+    {options.map(key => (
+      <Die key={key} face={key} />
+    ))}
+  </Grid>
 )
 
 const Prompt = <T extends NormalRoute[] | JunctionRoute[]>({
