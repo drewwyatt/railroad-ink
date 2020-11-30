@@ -1,4 +1,4 @@
 import * as Junction from './junctions'
-import * as Route from './routes'
+import * as Normal from './normals'
 
-export { Junction, Route }
+export { Junction, Normal }
