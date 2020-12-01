@@ -1,7 +1,7 @@
 import { times } from 'ramda'
 import type { FC } from 'react'
 import StraighHighwayDie from '../components/dice/StraightHighway'
-import Prompt from '../components/Prompt'
+import RouteSelect from '../components/RouteSelect'
 
 const Cell: FC<{ idx: number }> = ({ idx, ...props }) => (
   <div {...props}>
@@ -31,19 +31,11 @@ const Page: FC = () => (
   <>
     <main>
       <h1>Railroad Ink</h1>
+      <RouteSelect />
+      <br />
+      <br />
+      <br />
       <article>{times(cell, 7 * 7)}</article>
-      <Prompt
-        onClose={() => null}
-        onSelect={val => console.log('select', val)}
-        options={[
-          'CurvedHighway',
-          'StraightHighway',
-          'TJunctionHighway',
-          'CurvedRailway',
-          'StraightRailway',
-          'TJunctionRailway',
-        ]}
-      />
     </main>
     <style jsx>{`
       main {

@@ -16,6 +16,7 @@ import Die from './Die'
 type Props<T extends NormalRoute[] | JunctionRoute[]> = {
   options: T
   title?: string
+  isOpen?: boolean
 
   onClose(): void
   onSelect: T extends NormalRoute[]
@@ -34,10 +35,14 @@ const Options: FC<{ from: Route[] }> = ({ from: options }) => (
 const Prompt = <T extends NormalRoute[] | JunctionRoute[]>({
   title,
   options,
+  isOpen,
   onClose,
 }: Props<T>) => {
   return (
-    <Modal isOpen onClose={() => console.log('onClose')}>
+    <Modal
+      isOpen={typeof isOpen === 'boolean' ? isOpen : true}
+      onClose={() => console.log('onClose')}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>

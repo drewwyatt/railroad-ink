@@ -5,10 +5,11 @@ import type { NormalRoute, JunctionRoute } from '~/models/routes'
 type Routes = [
   PendingResult<NormalRoute>,
   PendingResult<NormalRoute>,
+  PendingResult<NormalRoute>,
   PendingResult<JunctionRoute>,
 ]
 
-const DEFAULT_ROUTES = [pending, pending, pending] as Routes
+const DEFAULT_ROUTES = [pending, pending, pending, pending] as Routes
 const CONTEXT = createContext<[Routes, Dispatch<Routes>]>([DEFAULT_ROUTES, () => null])
 
 export const RoutesProvider: FC = ({ children }) => (

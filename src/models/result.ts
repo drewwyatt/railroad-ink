@@ -27,3 +27,6 @@ export const isError = <T>(result: PendingResult<any, T>): result is ErrorType<T
 
 export const isPending = (result: PendingResult<any, any>): result is Pending =>
   result === pending
+
+export const unwrapOr = <T>(fallback: T, result: PendingResult<T>): T =>
+  isOK(result) ? result.value : fallback
