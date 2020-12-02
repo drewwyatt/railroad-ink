@@ -1,4 +1,4 @@
-import { Dispatch, FC, createContext, useContext, useReducer } from 'react'
+import { Dispatch, FC, createContext, useReducer } from 'react'
 import { DEfAULT_VALUE } from '~/models/board'
 import reducer, { State, Action } from './reducer'
 
@@ -9,7 +9,5 @@ export const BoardProvider: FC = ({ children }) => (
     {children}
   </CONTEXT.Provider>
 )
-
-export const useBoard = (ctx: typeof CONTEXT = CONTEXT) => useContext(ctx)
 
 export default CONTEXT

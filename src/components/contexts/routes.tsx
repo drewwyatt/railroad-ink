@@ -1,4 +1,4 @@
-import { Dispatch, FC, createContext, useContext, useState } from 'react'
+import { Dispatch, FC, createContext, useState } from 'react'
 import { PendingResult, pending } from '~/models/result'
 import type { NormalRoute, JunctionRoute } from '~/models/routes'
 
@@ -15,7 +15,4 @@ const CONTEXT = createContext<[Routes, Dispatch<Routes>]>([DEFAULT_ROUTES, () =>
 export const RoutesProvider: FC = ({ children }) => (
   <CONTEXT.Provider value={useState(DEFAULT_ROUTES)}>{children}</CONTEXT.Provider>
 )
-
-export const useRoutes = (ctx: typeof CONTEXT = CONTEXT) => useContext(ctx)
-
 export default CONTEXT
