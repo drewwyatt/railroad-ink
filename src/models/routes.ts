@@ -23,5 +23,8 @@ export const JUNCTION_ROUTES: JunctionRoute[] = [
   'CurvedStation',
 ]
 
+export const EMPTY = 'Empty'
+export type Empty = typeof EMPTY
+
 type Route = NormalRoute | JunctionRoute
 export default Route
