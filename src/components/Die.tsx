@@ -1,10 +1,10 @@
-import { Box, Button } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { FC, useMemo } from 'react'
-import Route from '~/models/routes'
+import Route, { Empty } from '~/models/routes'
 import * as Dice from './dice'
 
 type Props = {
-  face?: Route
+  face?: Route | Empty
   onClick?(): void
 }
 

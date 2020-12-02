@@ -1,4 +1,4 @@
-import { Grid } from '@chakra-ui/react'
+import { Box, Grid } from '@chakra-ui/react'
 import { update } from 'ramda'
 import { FC, useCallback, useState } from 'react'
 import useRoutes from './hooks/useRoutes'
@@ -28,7 +28,7 @@ const RouteSelect: FC = () => {
   )
 
   return (
-    <fieldset>
+    <Box as="fieldset" marginBottom="20px">
       <legend>Select Routes for Round</legend>
       <Grid templateColumns="repeat(4, 1fr)" gap="2">
         <Die face={unwrapOr(undefined, r0)} onClick={toOnClickFor(0)} />
@@ -43,7 +43,7 @@ const RouteSelect: FC = () => {
           onSelect={toOnSelectFor(promptResult.value)}
         />
       )}
-    </fieldset>
+    </Box>
   )
 }
 

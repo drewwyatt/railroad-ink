@@ -3,7 +3,6 @@ import { AppProps } from 'next/app'
 import type { FC } from 'react'
 import { BoardProvider } from '~/components/contexts/board'
 import { RoutesProvider } from '~/components/contexts/routes'
-import '../styles.css'
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (

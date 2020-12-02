@@ -1,58 +1,15 @@
-import { times } from 'ramda'
+import { Container, Flex, Heading } from '@chakra-ui/react'
 import type { FC } from 'react'
-import StraighHighwayDie from '../components/dice/StraightHighway'
-import RouteSelect from '../components/RouteSelect'
-
-const Cell: FC<{ idx: number }> = ({ idx, ...props }) => (
-  <div {...props}>
-    <button>
-      <StraighHighwayDie />
-    </button>
-    <style jsx>{`
-      div {
-        border-top: 1px solid #000;
-        border-left: 1px solid #000;
-      }
-      button {
-        appearance: none;
-        background: 0;
-        border: none;
-        padding: 0;
-        height: 100px;
-        width: 100px;
-      }
-    `}</style>
-  </div>
-)
-
-const cell = (idx: number) => <Cell idx={idx} key={['space', idx].join('-')} />
+import Board from '~/components/Board'
+import RouteSelect from '~/components/RouteSelect'
 
 const Page: FC = () => (
-  <>
-    <main>
-      <h1>Railroad Ink</h1>
+  <Container>
+    <Flex direction="column">
+      <Heading size="md">Railroad Ink</Heading>
       <RouteSelect />
-      <br />
-      <br />
-      <br />
-      <article>{times(cell, 7 * 7)}</article>
-    </main>
-    <style jsx>{`
-      main {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-      }
-      article {
-        display: grid;
-        grid-template-columns: repeat(7, 100px);
-        border-right: 1px solid #000;
-        border-bottom: 1px solid #000;
-      }
-    `}</style>
-  </>
+      <Board />
+    </Flex>
+  </Container>
 )
 export default Page
