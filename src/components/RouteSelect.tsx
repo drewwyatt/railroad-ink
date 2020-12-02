@@ -7,7 +7,7 @@ import { PendingResult, pending, ok, unwrapOr, isOK } from '~/models/result'
 import Route, { NORMAL_ROUTES, JUNCTION_ROUTES } from '~/models/routes'
 import Prompt from './Prompt'
 
-type RouteResult = ReturnType<typeof useRoutes>[0][number]
+// type RouteResult = ReturnType<typeof useRoutes>[0][number]
 type PromptResult = PendingResult<number>
 
 const ROUTE_OPTIONS = [NORMAL_ROUTES, NORMAL_ROUTES, NORMAL_ROUTES, JUNCTION_ROUTES]

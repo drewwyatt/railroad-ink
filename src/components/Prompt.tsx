@@ -24,10 +24,13 @@ type Props<T extends NormalRoute[] | JunctionRoute[]> = {
     : (route: JunctionRoute) => void
 }
 
-const Options: FC<{ from: Route[] }> = ({ from: options }) => (
+const Options: FC<{ from: Route[]; onSelect: (r: Route) => void }> = ({
+  from: options,
+  onSelect,
+}) => (
   <Grid templateColumns={`repeat(${options.length}, 1fr)`} gap="2">
     {options.map(key => (
-      <Die key={key} face={key} />
+      <Die key={key} face={key} onClick={() => onSelect(key)} />
     ))}
   </Grid>
 )
@@ -37,18 +40,16 @@ const Prompt = <T extends NormalRoute[] | JunctionRoute[]>({
   options,
   isOpen,
   onClose,
+  onSelect,
 }: Props<T>) => {
   return (
-    <Modal
-      isOpen={typeof isOpen === 'boolean' ? isOpen : true}
-      onClose={() => console.log('onClose')}
-    >
+    <Modal isOpen={typeof isOpen === 'boolean' ? isOpen : true} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Options from={options} />
+          <Options from={options} onSelect={onSelect} />
         </ModalBody>
 
         <ModalFooter>
