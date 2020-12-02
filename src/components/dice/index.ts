@@ -9,3 +9,5 @@ export { default as TJunctionRailway } from './TJunctionRailway'
 export { default as Overpass } from './Overpass'
 export { default as StraightStation } from './StraightStation'
 export { default as CurvedStation } from './CurvedStation'
+
+export { default as Empty } from './Empty'

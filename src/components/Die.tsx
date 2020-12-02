@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Die: FC<Props> = ({ face, onClick }) => {
-  const Face = useMemo(() => (face ? Dice[face] : () => null), [face])
+  const Face = useMemo(() => (face ? Dice[face] : Dice.Empty), [face])
   return (
     <Box
       as={onClick ? 'button' : undefined}
