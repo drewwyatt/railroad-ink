@@ -1,4 +1,4 @@
-import type Route from '~/models/routes'
+import type { Route } from '~/models/routes'
 
 type Move = [boardIndex: number, route: Route]
 export const applyTurn = (moves: Move[]) =>

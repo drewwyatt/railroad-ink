@@ -9,8 +9,8 @@ const reducer: Reducer<State, Action> = (state = DEfAULT_VALUE, action) => {
   switch (action.type) {
     case 'applyTurn':
       return action.payload.reduce(
-        (board, [idx, face]) => {
-          board[idx] = face
+        (board, [idx, route]) => {
+          board[idx] = route
           return board
         },
         [...state],

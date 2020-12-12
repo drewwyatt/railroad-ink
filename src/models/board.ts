@@ -1,7 +1,7 @@
 import { repeat } from 'ramda'
-import Route, { Empty, EMPTY } from './routes'
+import { EMPTY, Route } from './routes'
 
-type Board = (Route | Empty)[]
+type Board = Route[]
 
 export const WIDTH = 7
 export const HEIGHT = 7

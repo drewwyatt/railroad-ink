@@ -1,5 +1,7 @@
-export const move = (rollIndex: number, boardIndex: number) =>
-  ({ type: 'move', payload: { rollIndex, boardIndex } } as const)
+import type { Attributes } from '~/models/routes'
+
+export const move = (rollIndex: number, boardIndex: number, attributes: Attributes) =>
+  ({ type: 'move', payload: { rollIndex, boardIndex, attributes } } as const)
 
 export const undo = (rollIndex: number) =>
   ({

@@ -10,34 +10,34 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import type { FC } from 'react'
-import Route, { NormalRoute, JunctionRoute } from '~/models/routes'
+import type { DieFace, NormalFace, JunctionFace } from '~/models/routes'
 import Die from './Die'
 
-type Props<T extends Route[]> = {
+type Props<T extends DieFace[]> = {
   options: T
   title?: string
   isOpen?: boolean
 
   onClose(): void
-  onSelect: T extends NormalRoute[]
-    ? (route: NormalRoute, idx: number) => void
-    : T extends JunctionRoute[]
-    ? (route: JunctionRoute, idx: number) => void
-    : (route: Route, idx: number) => void
+  onSelect: T extends NormalFace[]
+    ? (route: NormalFace, idx: number) => void
+    : T extends JunctionFace[]
+    ? (route: JunctionFace, idx: number) => void
+    : (route: DieFace, idx: number) => void
 }
 
-const Options: FC<{ from: Route[]; onSelect: (r: Route, idx: number) => void }> = ({
+const Options: FC<{ from: DieFace[]; onSelect: (r: DieFace, idx: number) => void }> = ({
   from: options,
   onSelect,
 }) => (
   <Grid templateColumns={`repeat(${options.length}, 1fr)`} gap="2">
     {options.map((key, idx) => (
-      <Die key={key} face={key} onClick={() => onSelect(key, idx)} />
+      <Die key={[key, idx].join('-')} face={key} onClick={() => onSelect(key, idx)} />
     ))}
   </Grid>
 )
 
-const Prompt = <T extends Route[]>({
+const Prompt = <T extends DieFace[]>({
   title,
   options,
   isOpen,

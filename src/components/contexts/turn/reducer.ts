@@ -12,7 +12,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
     case 'move':
       return update(
         action.payload.rollIndex,
-        ok(action.payload.boardIndex),
+        ok([action.payload.boardIndex, action.payload.attributes]),
         state,
       ) as Turn
     case 'reset':
