@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "tsc": "tsc --noEmit",
-    "prettier": "prettier"
+    "prettier": "prettier",
+    "lint": "eslint '**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.0.3",
@@ -29,6 +30,7 @@
     "eslint": "^7.15.0",
     "eslint-config-import": "^0.13.0",
     "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1",
