@@ -1,7 +1,7 @@
 import { OKType, PendingResult, pending } from './result'
 import type { Attributes } from './routes'
 
-type Move = [boardIndex: number, attributes: Attributes]
+export type Move = [boardIndex: number, attributes: Attributes]
 
 type Turn = [
   PendingResult<Move>,

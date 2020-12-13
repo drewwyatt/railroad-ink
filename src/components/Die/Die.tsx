@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import { is } from 'ramda'
 import { FC, MouseEvent, useMemo } from 'react'
 import type { Attributes, DieFace } from '~/models/routes'
-import * as Dice from './dice'
+import * as Dice from '../dice'
 
 type Props = {
   face?: DieFace

@@ -1,26 +1,30 @@
 import { Box, Grid } from '@chakra-ui/react'
-import { update } from 'ramda'
-import { FC, useCallback, useState } from 'react'
+import { update, zip } from 'ramda'
+import { FC, useCallback, useMemo, useState } from 'react'
 import { PendingResult, pending, ok, unwrapOr, isOK } from '~/models/result'
 import { DieFace, NORMAL_FACES, JUNCTION_FACES } from '~/models/routes'
-import Die from './Die'
-import useRoutes from './hooks/useRoll'
+import { Move } from '~/models/turn'
+import Die, { Rolled } from './Die'
+import { useRoll, useTurn } from './hooks'
 import Prompt from './Prompt'
 
-// type RouteResult = ReturnType<typeof useRoutes>[0][number]
+type Dice = [PendingResult<DieFace>, PendingResult<Move>][]
 type PromptResult = PendingResult<number>
 
 const ROUTE_OPTIONS = [NORMAL_FACES, NORMAL_FACES, NORMAL_FACES, JUNCTION_FACES]
 
 const RouteSelect: FC = () => {
-  const [[r0, r1, r2, r3], setRoutes] = useRoutes()
+  const [rolls, setRoll] = useRoll()
+  const [turn] = useTurn()
   const [promptResult, setPromptResult] = useState<PromptResult>(pending)
+
+  const dice = useMemo<Dice>(() => zip(rolls, turn), [rolls, turn])
 
   const onClose = useCallback(() => setPromptResult(pending), [setPromptResult])
 
   const toOnClickFor = (idx: number) => () => setPromptResult(ok(idx))
   const toOnSelectFor = (idx: number) => (route: DieFace) => {
-    setRoutes(update(idx, ok(route)) as any) // TODO
+    setRoll(update(idx, ok(route)) as any) // TODO
     onClose()
   }
 
@@ -28,10 +32,11 @@ const RouteSelect: FC = () => {
     <Box as="fieldset" marginBottom="20px">
       <legend>Select Routes for Round</legend>
       <Grid templateColumns="repeat(4, 1fr)" gap="2">
-        <Die face={unwrapOr(undefined, r0)} onClick={toOnClickFor(0)} />
-        <Die face={unwrapOr(undefined, r1)} onClick={toOnClickFor(1)} />
-        <Die face={unwrapOr(undefined, r2)} onClick={toOnClickFor(2)} />
-        <Die face={unwrapOr(undefined, r3)} onClick={toOnClickFor(3)} />
+        {dice.map(([face, move], idx) => (
+          <Rolled allocated={isOK(move)} key={['rolled-die', idx].join('-')}>
+            <Die face={unwrapOr(undefined, face)} onClick={toOnClickFor(idx)} />
+          </Rolled>
+        ))}
       </Grid>
       {isOK(promptResult) && (
         <Prompt
