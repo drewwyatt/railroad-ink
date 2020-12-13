@@ -15,17 +15,14 @@ const ROUTE_OPTIONS = [NORMAL_FACES, NORMAL_FACES, NORMAL_FACES, JUNCTION_FACES]
 const RouteSelect: FC = () => {
   const [[r0, r1, r2, r3], setRoutes] = useRoutes()
   const [promptResult, setPromptResult] = useState<PromptResult>(pending)
-  const toOnClickFor = useCallback((idx: number) => () => setPromptResult(ok(idx)), [
-    setPromptResult,
-  ])
+
   const onClose = useCallback(() => setPromptResult(pending), [setPromptResult])
-  const toOnSelectFor = useCallback(
-    (idx: number) => (route: DieFace) => {
-      setRoutes(update(idx, ok(route)) as any) // TODO
-      onClose()
-    },
-    [setRoutes, onClose],
-  )
+
+  const toOnClickFor = (idx: number) => () => setPromptResult(ok(idx))
+  const toOnSelectFor = (idx: number) => (route: DieFace) => {
+    setRoutes(update(idx, ok(route)) as any) // TODO
+    onClose()
+  }
 
   return (
     <Box as="fieldset" marginBottom="20px">
