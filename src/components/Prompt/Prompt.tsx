@@ -11,33 +11,36 @@ import {
 } from '@chakra-ui/react'
 import type { FC } from 'react'
 import type { DieFace, NormalFace, JunctionFace } from '~/models/routes'
-import Die from './Die'
+import Option from './Option'
 
-type Props<T extends DieFace[]> = {
+type AllocatableDieFace = [DieFace, boolean]
+type MaybeAllocatable<T extends DieFace> = T | [T, boolean]
+
+type Props<T extends (DieFace | AllocatableDieFace)[]> = {
   options: T
   title?: string
   isOpen?: boolean
 
   onClose(): void
-  onSelect: T extends NormalFace[]
+  onSelect: T extends MaybeAllocatable<NormalFace>[]
     ? (route: NormalFace, idx: number) => void
-    : T extends JunctionFace[]
+    : T extends MaybeAllocatable<JunctionFace>[]
     ? (route: JunctionFace, idx: number) => void
     : (route: DieFace, idx: number) => void
 }
 
-const Options: FC<{ from: DieFace[]; onSelect: (r: DieFace, idx: number) => void }> = ({
-  from: options,
-  onSelect,
-}) => (
+const Options: FC<{
+  from: MaybeAllocatable<DieFace>[]
+  onSelect: (r: DieFace, idx: number) => void
+}> = ({ from: options, onSelect }) => (
   <Grid templateColumns={`repeat(${options.length}, 1fr)`} gap="2">
-    {options.map((key, idx) => (
-      <Die key={[key, idx].join('-')} face={key} onClick={() => onSelect(key, idx)} />
+    {options.map((option, idx) => (
+      <Option key={idx} for={option} index={idx} onClick={onSelect} />
     ))}
   </Grid>
 )
 
-const Prompt = <T extends DieFace[]>({
+const Prompt = <T extends (DieFace | AllocatableDieFace)[]>({
   title,
   options,
   isOpen,

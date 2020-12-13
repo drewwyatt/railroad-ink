@@ -1,4 +1,5 @@
 import { Grid } from '@chakra-ui/react'
+import { zip } from 'ramda'
 import React, {
   FC,
   MutableRefObject,
@@ -15,11 +16,17 @@ import {
   pending,
   ok,
   isOK,
-  forceUnwrap,
   valueEq,
   error,
+  unwrapOr,
 } from '~/models/result'
-import { DieFace, DEFAULT_ATTRIBUTES, applyAdjustment, Adjustment } from '~/models/routes'
+import {
+  DieFace,
+  DEFAULT_ATTRIBUTES,
+  EMPTY_FACE,
+  applyAdjustment,
+  Adjustment,
+} from '~/models/routes'
 import AttributeSelect from './AttributeSelect'
 import Die from './Die'
 import { useBoard, useContextValue, usePendingMoves, useRoll } from './hooks'
@@ -58,9 +65,14 @@ const Board: FC = () => {
   const [selectingAttributeFor, closePopup] = useContextValue(grid, toNumber)
   const pendingMoves = usePendingMoves()
   const [selectedSpace, setSelectedSpace] = useState<PendingResult<number>>(pending)
-  const [, takeTurn] = useTurn()
+  const [turn, takeTurn] = useTurn()
   const [roll] = useRoll()
   useClosePopupIfNoRoute(pendingMoves, selectingAttributeFor, closePopup)
+
+  const promptOptions = useMemo<[DieFace, boolean][]>(
+    () => zip(roll, turn).map(([r, t]) => [unwrapOr(EMPTY_FACE, r), isOK(t)]),
+    [roll, turn],
+  )
 
   const closePrompt = useCallback(() => setSelectedSpace(pending), [setSelectedSpace])
 
@@ -130,7 +142,7 @@ const Board: FC = () => {
         {isOK(selectedSpace) && (
           <Prompt
             title="Select a route"
-            options={roll.map(forceUnwrap)}
+            options={promptOptions}
             onClose={closePrompt}
             onSelect={onMove}
           />
