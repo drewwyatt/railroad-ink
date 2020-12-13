@@ -1,8 +1,8 @@
-import { useMemo } from 'react'
-import { isOK } from '~/models/result'
-import type { Attributes, DieFace } from '~/models/routes'
+import { useEffect, useMemo, useRef } from 'react'
+import { isOK, unwrapOr } from '~/models/result'
+import { Attributes, DEFAULT_ATTRIBUTES, DieFace } from '~/models/routes'
 import useRoll from './useRoll'
-import useTurn from './useTurn'
+import useTurn, { move } from './useTurn'
 
 export type PendingMove = {
   boardIdx: number
@@ -13,7 +13,23 @@ export type PendingMove = {
 
 const usePendingMoves = () => {
   const [roll] = useRoll()
-  const [turn] = useTurn()
+  const [turn, takeTurn] = useTurn()
+  const prevRoll = useRef(roll)
+
+  useEffect(() => {
+    roll.forEach((r, idx) => {
+      if (
+        unwrapOr(undefined, r as any) !==
+          unwrapOr(undefined, prevRoll.current[idx] as any) &&
+        isOK(r) &&
+        isOK(turn[idx]) &&
+        (turn[idx] as any).value[1] !== DEFAULT_ATTRIBUTES
+      ) {
+        takeTurn(move(idx, (turn[idx] as any).value[0] as any, DEFAULT_ATTRIBUTES))
+      }
+    })
+    prevRoll.current = roll
+  }, [roll, turn])
 
   return useMemo(
     () =>
