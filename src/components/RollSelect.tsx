@@ -1,10 +1,10 @@
 import { Box, Grid } from '@chakra-ui/react'
 import { update } from 'ramda'
 import { FC, useCallback, useState } from 'react'
-import useRoutes from './hooks/useRoll'
-import Die from './Die'
 import { PendingResult, pending, ok, unwrapOr, isOK } from '~/models/result'
 import { DieFace, NORMAL_FACES, JUNCTION_FACES } from '~/models/routes'
+import Die from './Die'
+import useRoutes from './hooks/useRoll'
 import Prompt from './Prompt'
 
 // type RouteResult = ReturnType<typeof useRoutes>[0][number]

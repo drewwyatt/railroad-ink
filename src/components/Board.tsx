@@ -20,14 +20,14 @@ import {
   error,
 } from '~/models/result'
 import { DieFace, DEFAULT_ATTRIBUTES, applyAdjustment, Adjustment } from '~/models/routes'
-import useBoard from './hooks/useBoard'
-import usePendingMoves from './hooks/usePendingMoves'
+import AttributeSelect from './AttributeSelect'
 import Die from './Die'
+import useBoard from './hooks/useBoard'
+import useContextValueForElement from './hooks/useContextValue'
+import usePendingMoves from './hooks/usePendingMoves'
 import useRoutes from './hooks/useRoll'
 import useTurn, { move } from './hooks/useTurn'
 import Prompt from './Prompt'
-import AttributeSelect from './AttributeSelect'
-import useContextValueForElement from './hooks/useContextValue'
 
 const toNumber = (result: Result<unknown>): Result<number> => {
   if (isOK(result)) {

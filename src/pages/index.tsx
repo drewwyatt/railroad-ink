@@ -1,8 +1,8 @@
 import { Container, Flex, Heading } from '@chakra-ui/react'
 import type { FC } from 'react'
 import Board from '~/components/Board'
-import RollSelect from '~/components/RollSelect'
 import NextTurn from '~/components/NextTurn'
+import RollSelect from '~/components/RollSelect'
 
 const Page: FC = () => (
   <Container>

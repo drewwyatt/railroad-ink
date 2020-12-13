@@ -11,14 +11,7 @@ type Props = {
   mirrored?: Attributes['mirrored']
 }
 
-const Die: FC<Props> = ({
-  face,
-  onClick,
-  rotation = 0,
-  mirrored,
-  children,
-  ...props
-}) => {
+const Die: FC<Props> = ({ face, onClick, rotation = 0, mirrored, ...props }) => {
   const Face = useMemo(() => (face ? Dice[face] : Dice.Empty), [face])
   const transform = useMemo(
     () =>
