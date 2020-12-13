@@ -13,21 +13,26 @@ import {
   Spacer,
   VStack,
 } from '@chakra-ui/react'
-import { FC, useCallback } from 'react'
+import type { FC } from 'react'
 import { BsArrowClockwise, BsArrowCounterclockwise } from 'react-icons/bs'
 import { GoMirror } from 'react-icons/go'
-import { Adjustment } from '~/models/routes'
+import { Adjustment, DieFace } from '~/models/routes'
 
 type Props = {
+  for: DieFace
   isOpen: boolean
   onClose(): void
   onSelect(selection: Adjustment): void
 }
 
-const AttributeSelect: FC<Props> = ({ children, isOpen, onClose, onSelect }) => {
-  const toOnClick = useCallback((selection: Adjustment) => () => onSelect(selection), [
-    onSelect,
-  ])
+const AttributeSelect: FC<Props> = ({
+  children,
+  for: dieFace,
+  isOpen,
+  onClose,
+  onSelect,
+}) => {
+  const toOnClick = (selection: Adjustment) => () => onSelect(selection)
 
   return (
     <Popover isOpen={isOpen}>
@@ -56,11 +61,13 @@ const AttributeSelect: FC<Props> = ({ children, isOpen, onClose, onSelect }) => 
                 icon={<BsArrowClockwise />}
                 onClick={toOnClick('rotate:right')}
               />
-              <IconButton
-                aria-label="mirror"
-                icon={<GoMirror />}
-                onClick={toOnClick('mirror')}
-              />
+              {dieFace === 'CurvedStation' && (
+                <IconButton
+                  aria-label="mirror"
+                  icon={<GoMirror />}
+                  onClick={toOnClick('mirror')}
+                />
+              )}
             </HStack>
             <Spacer />
             <Button variant="ghost" onClick={onClose}>

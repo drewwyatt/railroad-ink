@@ -15,7 +15,7 @@ const Die: FC<Props> = ({ face, onClick, rotation = 0, mirrored, ...props }) => 
   const Face = useMemo(() => (face ? Dice[face] : Dice.Empty), [face])
   const transform = useMemo(
     () =>
-      [rotation > 0 ? `rotate(${rotation}deg)` : null, mirrored ? 'scale(1, -1)' : null]
+      [rotation > 0 ? `rotate(${rotation}deg)` : null, mirrored ? 'scale(-1, 1)' : null]
         .filter(is(String))
         .join(' '),
     [rotation, mirrored],

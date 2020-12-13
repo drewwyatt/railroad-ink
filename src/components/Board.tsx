@@ -124,6 +124,7 @@ const Board: FC = () => {
             const attributes = pendingMove?.attributes ?? committed[1]
             return (
               <AttributeSelect
+                for={face}
                 key={[idx, face].join('-')}
                 isOpen={valueEq(idx, selectingAttributeFor)}
                 onClose={closePopup}
