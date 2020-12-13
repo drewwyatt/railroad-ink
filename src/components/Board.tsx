@@ -22,10 +22,7 @@ import {
 import { DieFace, DEFAULT_ATTRIBUTES, applyAdjustment, Adjustment } from '~/models/routes'
 import AttributeSelect from './AttributeSelect'
 import Die from './Die'
-import useBoard from './hooks/useBoard'
-import useContextValueForElement from './hooks/useContextValue'
-import usePendingMoves from './hooks/usePendingMoves'
-import useRoutes from './hooks/useRoll'
+import { useBoard, useContextValue, usePendingMoves, useRoll } from './hooks'
 import useTurn, { move } from './hooks/useTurn'
 import Prompt from './Prompt'
 
@@ -40,7 +37,7 @@ const toNumber = (result: Result<unknown>): Result<number> => {
 
 const useClosePopupIfNoRoute = (
   pendingMoves: ReturnType<typeof usePendingMoves>,
-  ...contextValueProps: ReturnType<typeof useContextValueForElement>
+  ...contextValueProps: ReturnType<typeof useContextValue>
 ) => {
   const [selectingAttributeFor, closePopup] = contextValueProps
   useEffect(() => {
@@ -58,11 +55,11 @@ const useClosePopupIfNoRoute = (
 const Board: FC = () => {
   const [commitedMoves] = useBoard()
   const grid = useRef() as MutableRefObject<HTMLElement>
-  const [selectingAttributeFor, closePopup] = useContextValueForElement(grid, toNumber)
+  const [selectingAttributeFor, closePopup] = useContextValue(grid, toNumber)
   const pendingMoves = usePendingMoves()
   const [selectedSpace, setSelectedSpace] = useState<PendingResult<number>>(pending)
   const [, takeTurn] = useTurn()
-  const [routes] = useRoutes()
+  const [roll] = useRoll()
   useClosePopupIfNoRoute(pendingMoves, selectingAttributeFor, closePopup)
 
   const closePrompt = useCallback(() => setSelectedSpace(pending), [setSelectedSpace])
@@ -133,7 +130,7 @@ const Board: FC = () => {
         {isOK(selectedSpace) && (
           <Prompt
             title="Select a route"
-            options={routes.map(forceUnwrap)}
+            options={roll.map(forceUnwrap)}
             onClose={closePrompt}
             onSelect={onMove}
           />
