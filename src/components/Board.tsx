@@ -1,8 +1,9 @@
-import { Grid } from '@chakra-ui/react'
+import { Box, Grid, Spacer } from '@chakra-ui/react'
 import React, { FC, MutableRefObject, useCallback, useRef, useState } from 'react'
 import { WIDTH, HEIGHT } from '~/models/board'
 import { PendingResult, Result, pending, ok, isOK, error } from '~/models/result'
 import { AltClickValueProvider } from './contexts/alt-click-value'
+import TopExits from './exits/TopExits'
 import { useBoard } from './hooks'
 import MoveSelect from './MoveSelect'
 import Tile from './Tile'
@@ -24,19 +25,27 @@ const Board: FC = () => {
   const closePrompt = useCallback(() => setSelectedSpace(pending), [setSelectedSpace])
 
   return (
-    <AltClickValueProvider on={grid} transform={toNumber}>
-      <Grid
-        as="article"
-        ref={grid as any}
-        templateColumns={`repeat(${WIDTH}, 1fr)`}
-        templateRows={`repeat(${HEIGHT}, 1fr)`}
-      >
-        {commitedMoves.map((committed, idx) => (
-          <Tile key={idx} index={idx} route={committed} onSelect={setSelectedSpace} />
-        ))}
-      </Grid>
-      <MoveSelect boardIdx={selectedSpace} onClose={closePrompt} />
-    </AltClickValueProvider>
+    <Grid templateColumns="20px auto 20px" templateRows="20px auto 20px">
+      <TopExits />
+      <Box>hey</Box>
+      <AltClickValueProvider on={grid} transform={toNumber}>
+        <Grid
+          as="article"
+          ref={grid as any}
+          templateColumns={`repeat(${WIDTH}, 1fr)`}
+          templateRows={`repeat(${HEIGHT}, 1fr)`}
+        >
+          {commitedMoves.map((committed, idx) => (
+            <Tile key={idx} index={idx} route={committed} onSelect={setSelectedSpace} />
+          ))}
+        </Grid>
+        <MoveSelect boardIdx={selectedSpace} onClose={closePrompt} />
+      </AltClickValueProvider>
+      <Box>ho</Box>
+      <Spacer />
+      <Box>bottom</Box>
+      <Spacer />
+    </Grid>
   )
 }
 
