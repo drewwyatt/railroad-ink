@@ -8,6 +8,14 @@ export type NormalFace =
 
 export type JunctionFace = 'Overpass' | 'StraightStation' | 'CurvedStation'
 
+export type SpecialFace =
+  | 'Special0'
+  | 'Special1'
+  | 'Special2'
+  | 'Special3'
+  | 'Special4'
+  | 'Special5'
+
 export const NORMAL_FACES: NormalFace[] = [
   'CurvedHighway',
   'StraightHighway',
@@ -21,6 +29,15 @@ export const JUNCTION_FACES: JunctionFace[] = [
   'Overpass',
   'StraightStation',
   'CurvedStation',
+]
+
+export const SPECIAL_FACES: SpecialFace[] = [
+  'Special0',
+  'Special1',
+  'Special2',
+  'Special3',
+  'Special4',
+  'Special5',
 ]
 
 export const EMPTY_FACE = 'Empty'
@@ -59,7 +76,7 @@ export const applyAdjustment = (
   }
 }
 
-export type DieFace = NormalFace | JunctionFace | EmptyFace
+export type DieFace = NormalFace | JunctionFace | SpecialFace | EmptyFace
 export type Route<T extends DieFace = DieFace> = [face: T, attributes: Attributes]
 
 const route = (face: DieFace, attributes: Attributes = DEFAULT_ATTRIBUTES) =>

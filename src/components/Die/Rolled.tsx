@@ -1,7 +1,7 @@
 import { AspectRatio, Box } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { FC } from 'react'
-import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
+import { ImCheckboxChecked } from 'react-icons/im'
 
 type Props = {
   allocated: boolean

@@ -1,9 +1,6 @@
-import Zero from './0'
-import One from './1'
-import Two from './2'
-import Three from './3'
-import Four from './4'
-import Five from './5'
-
-const dice = [Zero, One, Two, Three, Four, Five]
-export default dice
+export { default as Special0 } from './0'
+export { default as Special1 } from './1'
+export { default as Special2 } from './2'
+export { default as Special3 } from './3'
+export { default as Special4 } from './4'
+export { default as Special5 } from './5'

@@ -13,8 +13,8 @@ import type { FC } from 'react'
 import type { DieFace, NormalFace, JunctionFace } from '~/models/routes'
 import Option from './Option'
 
-type AllocatableDieFace = [DieFace, boolean]
-type MaybeAllocatable<T extends DieFace> = T | [T, boolean]
+type AllocatableDieFace = [DieFace, boolean] | readonly [DieFace, boolean]
+type MaybeAllocatable<T extends DieFace> = T | [T, boolean] | readonly [T, boolean]
 
 type Props<T extends (DieFace | AllocatableDieFace)[]> = {
   options: T
@@ -27,6 +27,8 @@ type Props<T extends (DieFace | AllocatableDieFace)[]> = {
     : T extends MaybeAllocatable<JunctionFace>[]
     ? (route: JunctionFace, idx: number) => void
     : (route: DieFace, idx: number) => void
+
+  renderFooter?(): React.ReactNode
 }
 
 const Options: FC<{
@@ -46,6 +48,7 @@ const Prompt = <T extends (DieFace | AllocatableDieFace)[]>({
   isOpen,
   onClose,
   onSelect,
+  renderFooter,
 }: Props<T>) => {
   return (
     <Modal isOpen={typeof isOpen === 'boolean' ? isOpen : true} onClose={onClose}>
@@ -58,9 +61,13 @@ const Prompt = <T extends (DieFace | AllocatableDieFace)[]>({
         </ModalBody>
 
         <ModalFooter>
-          <Button variant="ghost" onClick={onClose}>
-            Nevermind
-          </Button>
+          {renderFooter ? (
+            renderFooter()
+          ) : (
+            <Button variant="ghost" onClick={onClose}>
+              Nevermind
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

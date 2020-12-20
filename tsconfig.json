@@ -12,6 +12,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "downlevelIteration": true,
+    "noUnusedLocals": true,
     "jsx": "preserve",
     "baseUrl": "src",
     "paths": {

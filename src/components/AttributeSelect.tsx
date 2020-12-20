@@ -33,6 +33,7 @@ const AttributeSelect: FC<Props> = ({
   onSelect,
 }) => {
   const toOnClick = (selection: Adjustment) => () => onSelect(selection)
+  const canMirror = dieFace === 'CurvedStation'
 
   return (
     <Popover isOpen={isOpen}>
@@ -42,7 +43,7 @@ const AttributeSelect: FC<Props> = ({
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton onClick={onClose} />
-        <PopoverHeader>Rotate or Mirror</PopoverHeader>
+        <PopoverHeader>{canMirror ? 'Rotate or Mirror' : 'Rotate'}</PopoverHeader>
         <PopoverBody>
           <VStack>
             <HStack
@@ -61,7 +62,7 @@ const AttributeSelect: FC<Props> = ({
                 icon={<BsArrowClockwise />}
                 onClick={toOnClick('rotate:right')}
               />
-              {dieFace === 'CurvedStation' && (
+              {canMirror && (
                 <IconButton
                   aria-label="mirror"
                   icon={<GoMirror />}

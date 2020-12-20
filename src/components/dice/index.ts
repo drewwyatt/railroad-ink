@@ -12,4 +12,4 @@ export { default as CurvedStation } from './CurvedStation'
 
 export { default as Empty } from './Empty'
 
-export { default as specials } from './specials'
+export * from './specials'
