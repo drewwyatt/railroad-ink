@@ -3,6 +3,7 @@ import React, { FC, MutableRefObject, useCallback, useRef, useState } from 'reac
 import { WIDTH, HEIGHT } from '~/models/board'
 import { PendingResult, Result, pending, ok, isOK, error } from '~/models/result'
 import { AltClickValueProvider } from './contexts/alt-click-value'
+import SideExits from './exits/SideExits'
 import TopExits from './exits/TopExits'
 import { useBoard } from './hooks'
 import MoveSelect from './MoveSelect'
@@ -27,7 +28,7 @@ const Board: FC = () => {
   return (
     <Grid templateColumns="20px auto 20px" templateRows="20px auto 20px">
       <TopExits />
-      <Box>hey</Box>
+      <SideExits />
       <AltClickValueProvider on={grid} transform={toNumber}>
         <Grid
           as="article"
@@ -41,10 +42,8 @@ const Board: FC = () => {
         </Grid>
         <MoveSelect boardIdx={selectedSpace} onClose={closePrompt} />
       </AltClickValueProvider>
-      <Box>ho</Box>
-      <Spacer />
-      <Box>bottom</Box>
-      <Spacer />
+      <SideExits transform="rotate(180deg)" />
+      <TopExits />
     </Grid>
   )
 }

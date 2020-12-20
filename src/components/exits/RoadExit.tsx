@@ -16,14 +16,8 @@ const SVG: FC<SVGProps<SVGSVGElement>> = props => (
 )
 
 const Exit: FC = () => (
-  <Box
-    width="20%"
-    left="50%"
-    transform="translate(-50%, -50%)"
-    top="10px"
-    position="absolute"
-  >
-    <SVG height="50%" />
+  <Box top="0" right="0" bottom="0" left="0" position="absolute">
+    <SVG width="100%" height="100%" />
   </Box>
 )
 
