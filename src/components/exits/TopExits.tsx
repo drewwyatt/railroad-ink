@@ -1,6 +1,7 @@
 import { Box, Grid, Spacer } from '@chakra-ui/react'
 import { FC } from 'react'
 import { WIDTH } from '~/models/board'
+import RailExit from './RailExit'
 import RoadExit from './RoadExit'
 
 const Container: FC = ({ children }) => <Box position="relative">{children}</Box>
@@ -15,7 +16,7 @@ const Exits: FC = () => (
       </Container>
       <Spacer />
       <Container>
-        <RoadExit />
+        <RailExit />
       </Container>
       <Spacer />
       <Container>
