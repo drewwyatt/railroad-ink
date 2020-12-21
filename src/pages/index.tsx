@@ -1,4 +1,4 @@
-import { Container, Flex, Heading } from '@chakra-ui/react'
+import { Container, Grid, Heading, Spacer } from '@chakra-ui/react'
 import type { FC } from 'react'
 import Board from '~/components/Board'
 import NextTurn from '~/components/NextTurn'
@@ -7,13 +7,14 @@ import SpecialSelect from '~/components/SpecialSelect'
 
 const Page: FC = () => (
   <Container>
-    <Flex direction="column">
+    <Grid templateRows="1fr 3fr 3fr auto 1fr 1fr">
       <Heading size="md">Railroad Ink</Heading>
       <RollSelect />
       <SpecialSelect />
       <Board />
+      <Spacer />
       <NextTurn />
-    </Flex>
+    </Grid>
   </Container>
 )
 export default Page
