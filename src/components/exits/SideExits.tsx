@@ -17,6 +17,8 @@ const Exits: FC<GridProps> = props => (
     width="15px"
     templateRows={`repeat(${WIDTH}, 1fr)`}
     overflow="hidden"
+    pointerEvents="none"
+    userSelect="none"
   >
     <Spacer />
     <Container>

@@ -8,8 +8,12 @@ const Container: FC = ({ children }) => <Box position="relative">{children}</Box
 
 const Exits: FC = () => (
   <>
-    <Spacer />
-    <Grid templateColumns={`repeat(${WIDTH}, 1fr)`}>
+    <Spacer pointerEvents="none" userSelect="none" />
+    <Grid
+      templateColumns={`repeat(${WIDTH}, 1fr)`}
+      pointerEvents="none"
+      userSelect="none"
+    >
       <Spacer />
       <Container>
         <RoadExit />
@@ -24,7 +28,7 @@ const Exits: FC = () => (
       </Container>
       <Spacer />
     </Grid>
-    <Spacer />
+    <Spacer pointerEvents="none" userSelect="none" />
   </>
 )
 
