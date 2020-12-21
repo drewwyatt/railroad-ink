@@ -29,7 +29,7 @@ const RouteSelect: FC = () => {
   }
 
   return (
-    <Box as="fieldset" marginBottom="20px">
+    <Box as="fieldset" marginBottom="20px" userSelect="none">
       <legend>Select Routes for Round</legend>
       <Grid templateColumns="repeat(4, 1fr)" gap="2">
         {dice.map(([face, move], idx) => (

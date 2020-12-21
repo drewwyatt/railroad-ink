@@ -9,7 +9,7 @@ const RouteSelect: FC = () => {
 
   return useMemo(
     () => (
-      <Box as="fieldset" marginBottom="20px">
+      <Box as="fieldset" marginBottom="20px" userSelect="none">
         <legend>Special Routes (may use up to one per turn)</legend>
         <Grid templateColumns="repeat(6, 1fr)" gap="2">
           {SPECIAL_FACES.map(face => (
