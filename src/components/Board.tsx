@@ -1,4 +1,4 @@
-import { Box, Grid, Spacer } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 import React, { FC, MutableRefObject, useCallback, useRef, useState } from 'react'
 import { WIDTH, HEIGHT } from '~/models/board'
 import { PendingResult, Result, pending, ok, isOK, error } from '~/models/result'
