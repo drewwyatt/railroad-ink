@@ -11,7 +11,13 @@ const Container: FC<BoxProps> = ({ children }) => (
 )
 
 const Exits: FC<GridProps> = props => (
-  <Grid {...props} height="100%" width="20px" templateRows={`repeat(${WIDTH}, 1fr)`}>
+  <Grid
+    {...props}
+    height="100%"
+    width="15px"
+    templateRows={`repeat(${WIDTH}, 1fr)`}
+    overflow="hidden"
+  >
     <Spacer />
     <Container>
       <RailExit />

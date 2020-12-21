@@ -26,7 +26,7 @@ const Board: FC = () => {
   const closePrompt = useCallback(() => setSelectedSpace(pending), [setSelectedSpace])
 
   return (
-    <Grid templateColumns="20px auto 20px" templateRows="20px auto 20px">
+    <Grid templateColumns="15px auto 15px" templateRows="20px auto 20px">
       <TopExits />
       <SideExits />
       <AltClickValueProvider on={grid} transform={toNumber}>

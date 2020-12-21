@@ -9,7 +9,7 @@ const Container: FC = ({ children }) => <Box position="relative">{children}</Box
 const Exits: FC = () => (
   <>
     <Spacer />
-    <Grid height="20px" templateColumns={`repeat(${WIDTH}, 1fr)`}>
+    <Grid templateColumns={`repeat(${WIDTH}, 1fr)`}>
       <Spacer />
       <Container>
         <RoadExit />
