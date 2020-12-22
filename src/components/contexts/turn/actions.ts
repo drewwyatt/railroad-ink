@@ -11,6 +11,12 @@ export const undo = (rollIndex: number) =>
 
 export const reset = () => ({ type: 'reset' } as const)
 
+export const clearBoardIdx = (idx: number) =>
+  ({
+    type: 'clearBoardIdx',
+    payload: idx,
+  } as const)
+
 /**
  * This is an effect creator
  */

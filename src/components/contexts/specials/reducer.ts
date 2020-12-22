@@ -69,6 +69,13 @@ const reducer: Reducer<State, Action> = (state, action) => {
           move: [action.payload.boardIdx, action.payload.attributes],
         },
       }
+    case 'clearBoardIdx':
+      return state.selection?.move[0] === action.payload
+        ? {
+            ...state,
+            selection: undefined,
+          }
+        : state
     default:
       return state
   }

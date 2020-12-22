@@ -1,4 +1,4 @@
-import { update } from 'ramda'
+import { adjust, always, update } from 'ramda'
 import type { Reducer } from 'react'
 import { ok, pending, isOK } from '~/models/result'
 import Turn, { DEFAULT_VALUE } from '~/models/turn'
@@ -12,7 +12,6 @@ const hasBoardIndex = (idx: number) => (result: State[number]) =>
 
 const applyMove = (state: State, action: Extract<Action, { type: 'move' }>): State => {
   const existingIdx = state.findIndex(hasBoardIndex(action.payload.boardIndex))
-  console.log('apply existing', existingIdx)
   const moveableState = existingIdx === -1 ? state : update(existingIdx, pending, state)
   return update(
     action.payload.rollIndex,
@@ -29,6 +28,10 @@ const reducer: Reducer<State, Action> = (state, action) => {
       return DEFAULT_VALUE
     case 'undo':
       return update(action.payload, pending, state) as Turn
+    case 'clearBoardIdx': {
+      const idx = state.findIndex(hasBoardIndex(action.payload))
+      return adjust(idx, always(pending), state) as Turn
+    }
     default:
       return state
   }

@@ -15,3 +15,9 @@ export const adjust = (adjustment: Adjustment) =>
 export const clearSelection = () => ({ type: 'clear' } as const)
 
 export const apply = () => ({ type: 'apply' } as const)
+
+export const clearBoardIdx = (idx: number) =>
+  ({
+    type: 'clearBoardIdx',
+    payload: idx,
+  } as const)
