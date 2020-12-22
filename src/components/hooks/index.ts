@@ -1,4 +1,3 @@
-export { default as useAltClickValue } from './useAltClickValue'
 export { default as useAvailableSpecials } from './useAvailableSpecials'
 export { default as useBoard } from './useBoard'
 export { default as useMove } from './useMove'

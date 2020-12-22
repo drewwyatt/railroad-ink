@@ -1,7 +1,13 @@
-import { zip } from 'ramda'
-import { useMemo } from 'react'
+import { curry, zip } from 'ramda'
+import { useMemo, useState } from 'react'
 import { isOK, unwrapOr } from '~/models/result'
-import { DieFace, EMPTY_FACE } from '~/models/routes'
+import {
+  Adjustment,
+  applyAdjustment,
+  DEFAULT_ATTRIBUTES,
+  DieFace,
+  EMPTY_FACE,
+} from '~/models/routes'
 import { useAvailableSpecials, useRoll, useTurn } from '../hooks'
 
 export type Options = [DieFace, boolean][]
@@ -24,4 +30,10 @@ export const useOptionsFromSpecials = () => {
       [selected, [...available].map(face => [face, face === selected] as const)] as const,
     [selected, available],
   )
+}
+
+export const useAdjustments = () => {
+  const [state, setState] = useState(DEFAULT_ATTRIBUTES)
+  const adjust = (adjustment: Adjustment) => setState(curry(applyAdjustment)(adjustment))
+  return [state, adjust] as const
 }

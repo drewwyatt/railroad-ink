@@ -1,14 +1,14 @@
 import { useCallback } from 'react'
 import { useSpecials } from '~/components/contexts/specials'
 import * as ac from '~/components/contexts/specials/actions'
-import { SpecialFace } from '~/models/routes'
+import { Attributes, SpecialFace } from '~/models/routes'
 
 const useSpecialSelect = () => {
   const [, dispatch] = useSpecials()
 
   const select = useCallback(
-    (selected: SpecialFace, boardIdx: number) => {
-      dispatch(ac.select(selected, boardIdx))
+    (selected: SpecialFace, boardIdx: number, attributes: Attributes) => {
+      dispatch(ac.select(selected, boardIdx, attributes))
     },
     [dispatch],
   )

@@ -1,10 +1,5 @@
 import { Reducer } from 'react'
-import {
-  applyAdjustment,
-  DEFAULT_ATTRIBUTES,
-  SpecialFace,
-  SPECIAL_FACES,
-} from '~/models/routes'
+import { applyAdjustment, SpecialFace, SPECIAL_FACES } from '~/models/routes'
 import { Move } from '~/models/turn'
 import * as actions from './actions'
 
@@ -71,7 +66,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
         ...state,
         selection: {
           face: action.payload.face,
-          move: [action.payload.boardIdx, DEFAULT_ATTRIBUTES],
+          move: [action.payload.boardIdx, action.payload.attributes],
         },
       }
     default:

@@ -1,9 +1,9 @@
-import { Adjustment, SpecialFace } from '~/models/routes'
+import { Adjustment, Attributes, SpecialFace } from '~/models/routes'
 
-export const select = (face: SpecialFace, boardIdx: number) =>
+export const select = (face: SpecialFace, boardIdx: number, attributes: Attributes) =>
   ({
     type: 'select',
-    payload: { face, boardIdx },
+    payload: { face, boardIdx, attributes },
   } as const)
 
 export const adjust = (adjustment: Adjustment) =>

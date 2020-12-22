@@ -9,17 +9,22 @@ type PlainProps = {
   onClick(): void
 }
 
-const PlainOption: FC<PlainProps> = ({ face, onClick }) => (
-  <Die face={face} onClick={onClick} />
+const PlainOption: FC<PlainProps> = ({ face, onClick, ...props }) => (
+  <Die {...props} face={face} onClick={onClick} />
 )
 
 interface AllocatableProps extends PlainProps {
   allocated: boolean
 }
 
-const AllocatableOption: FC<AllocatableProps> = ({ face, allocated, onClick }) => (
+const AllocatableOption: FC<AllocatableProps> = ({
+  face,
+  allocated,
+  onClick,
+  ...props
+}) => (
   <Rolled allocated={allocated}>
-    <Die face={face} onClick={onClick} />
+    <Die {...props} face={face} onClick={onClick} />
   </Rolled>
 )
 
@@ -29,17 +34,19 @@ type Props = {
   onClick(face: DieFace, index: number): void
 }
 
-const Option: FC<Props> = ({ for: faceOrTuple, index, onClick }) =>
+const Option: FC<Props> = ({ for: faceOrTuple, index, onClick, ...props }) =>
   useMemo(
     () =>
       isTuple(faceOrTuple) ? (
         <AllocatableOption
+          {...props}
           face={faceOrTuple[0]}
           allocated={faceOrTuple[1]}
           onClick={() => onClick(faceOrTuple[0], index)}
         />
       ) : (
         <PlainOption
+          {...props}
           face={faceOrTuple as DieFace}
           onClick={() => onClick(faceOrTuple as DieFace, index)}
         />

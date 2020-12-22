@@ -8,18 +8,28 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  VStack,
+  HStack,
 } from '@chakra-ui/react'
 import type { FC } from 'react'
-import type { DieFace, NormalFace, JunctionFace } from '~/models/routes'
+import {
+  DieFace,
+  NormalFace,
+  JunctionFace,
+  Attributes,
+  DEFAULT_ATTRIBUTES,
+} from '~/models/routes'
 import Option from './Option'
 
 type AllocatableDieFace = [DieFace, boolean] | readonly [DieFace, boolean]
 type MaybeAllocatable<T extends DieFace> = T | [T, boolean] | readonly [T, boolean]
 
 type Props<T extends (DieFace | AllocatableDieFace)[]> = {
+  children?: React.ReactNode
   options: T
   title?: string
   isOpen?: boolean
+  attributes?: Attributes
 
   onClose(): void
   onSelect: T extends MaybeAllocatable<NormalFace>[]
@@ -32,17 +42,20 @@ type Props<T extends (DieFace | AllocatableDieFace)[]> = {
 }
 
 const Options: FC<{
+  attributes: Attributes
   from: MaybeAllocatable<DieFace>[]
   onSelect: (r: DieFace, idx: number) => void
-}> = ({ from: options, onSelect }) => (
-  <Grid templateColumns={`repeat(${options.length}, 1fr)`} gap="2">
+}> = ({ attributes, from: options, onSelect }) => (
+  <Grid width="100%" templateColumns={`repeat(${options.length}, 1fr)`} gap="2">
     {options.map((option, idx) => (
-      <Option key={idx} for={option} index={idx} onClick={onSelect} />
+      <Option {...attributes} key={idx} for={option} index={idx} onClick={onSelect} />
     ))}
   </Grid>
 )
 
 const Prompt = <T extends (DieFace | AllocatableDieFace)[]>({
+  attributes = DEFAULT_ATTRIBUTES,
+  children,
   title,
   options,
   isOpen,
@@ -57,7 +70,12 @@ const Prompt = <T extends (DieFace | AllocatableDieFace)[]>({
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Options from={options} onSelect={onSelect} />
+          <VStack width="100%" height="100%">
+            <HStack width="100%">
+              <Options attributes={attributes} from={options} onSelect={onSelect} />
+            </HStack>
+            {children}
+          </VStack>
         </ModalBody>
 
         <ModalFooter>
